@@ -64,6 +64,21 @@ function themeConfig($form) {
 	0 => _t('关闭')),
 	0, _t('动态显示侧边栏'), _t('默认关闭'));
 	$form->addInput($SidebarFixed);
+	
+	$prismVersion = new Typecho_Widget_Helper_Form_Element_Text('prismVersion', NULL, '1.19.0', _t('prism版本'), _t('默认1.19.0'));
+	$form->addInput($prismVersion);
+	
+	$prismTheam = new Typecho_Widget_Helper_Form_Element_Radio('prismTheam', 
+	array('prism' => _t('Dafault'),
+	'prism-dark' => _t('Dark'),
+	'prism-funky' => _t('Funky'),
+	'prism-okaidia' => _t('Okaidia'),
+	'prism-twilight' => _t('Twilight'),
+	'prism-coy' => _t('Coy'),
+	'prism-solarizedlight' => _t('Solarized light'),
+	'prism-tomorrow' => _t('Tomorrow')),
+	'prism', _t('prism主题'), _t('默认dafault，请根据需求选择合适主题'));
+	$form->addInput($prismTheam);
 
 	$cjCDN = new Typecho_Widget_Helper_Form_Element_Radio('cjCDN', 
 	array('bc' => _t('BootCDN'),
