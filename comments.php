@@ -73,6 +73,9 @@ echo $commentClass;
 <input type="email" name="mail" id="mail" class="text" placeholder="邮箱<?php if ($this->options->commentsRequireMail): ?> *<?php endif; ?>" value="<?php $this->remember('mail'); ?>"<?php if ($this->options->commentsRequireMail): ?> required<?php endif; ?> />
 <input type="url" name="url" id="url" class="text" placeholder="http://<?php if ($this->options->commentsRequireURL): ?> *<?php endif; ?>" value="<?php $this->remember('url'); ?>"<?php if ($this->options->commentsRequireURL): ?> required<?php endif; ?> />
 <?php endif; ?>
+<?php if ($this->options->commentProtect): ?>
+<p><?php spam_protection_math();?></p>
+<?php endif; ?>
 <button type="submit" class="submit">提交评论</button>
 </p>
 </form>

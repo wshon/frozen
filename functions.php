@@ -94,6 +94,12 @@ function themeConfig($form) {
 	false, _t('Gravatar头像源'), _t('默认官方源'));
 	$form->addInput($GravatarUrl);
 
+    $commentProtect = new Typecho_Widget_Helper_Form_Element_Radio('commentProtect',
+    array(1 => _t('启用'),
+    0 => _t('关闭')),
+    0, _t('评论验证码'), _t('默认关闭，启用后将开启评论验证码'));
+    $form->addInput($commentProtect);
+
 	$compressHtml = new Typecho_Widget_Helper_Form_Element_Radio('compressHtml', 
 	array(1 => _t('启用'),
 	0 => _t('关闭')),
@@ -191,6 +197,32 @@ function themeInit($archive) {
 			$archive->content = createCatalog($archive->content);
 		}
 	}
+	if($options->commentProtect) {
+        $comment = spam_protection_pre($comment);
+	}
+}
+
+function spam_protection_math(){
+    $num1=rand(1,100);
+    $num2=rand(1,100);
+    echo "<label for=\"math\">请输入<code>$num1</code>+<code>$num2</code>的计算结果：</label>\n";
+    echo "<input type=\"text\" name=\"sum\" class=\"text\" value=\"\" size=\"25\" tabindex=\"4\" style=\"width:218px\" placeholder=\"计算结果：\">\n";
+    echo "<input type=\"hidden\" name=\"num1\" value=\"$num1\">\n";
+    echo "<input type=\"hidden\" name=\"num2\" value=\"$num2\">";
+}
+
+function spam_protection_pre($comment){
+    $sum=$_POST['sum'];
+    switch($sum){
+        case $_POST['num1']+$_POST['num2']:
+        break;
+    case null:
+        throw new Typecho_Widget_Exception(_t('请输入验证码。','评论失败'));
+        break;
+    default:
+        throw new Typecho_Widget_Exception(_t('验证码错误，请重试。','评论失败'));
+    }
+    return $comment;
 }
 
 function cjUrl($path) {
