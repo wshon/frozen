@@ -1,6 +1,6 @@
 <?php
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
-define('INITIAL_VERSION_NUMBER', '2.4.4');
+define('FROZEN_VERSION_NUMBER', '0.9.1');
 if (Helper::options()->GravatarUrl) define('__TYPECHO_GRAVATAR_PREFIX__', Helper::options()->GravatarUrl);
 error_reporting(0);
 
@@ -17,7 +17,7 @@ function themeConfig($form) {
 	$favicon = new Typecho_Widget_Helper_Form_Element_Text('favicon', NULL, NULL, _t('Favicon 地址'), _t('在这里填入一个图片 URL 地址, 以添加一个Favicon，留空则不单独设置Favicon'));
 	$form->addInput($favicon);
 
-	$cjcdnAddress = new Typecho_Widget_Helper_Form_Element_Text('cjcdnAddress', NULL, NULL, _t('CSS文件的链接地址替换'), _t('请输入你的CDN云存储地址，例如：http://cdn.example.com/，支持绝大部分有镜像功能的CDN服务<br><b>被替换的原地址为主题文件位置，即：http://www.example.com/usr/themes/initial/</b>'));
+	$cjcdnAddress = new Typecho_Widget_Helper_Form_Element_Text('cjcdnAddress', NULL, NULL, _t('CSS文件的链接地址替换'), _t('请输入你的CDN云存储地址，例如：http://cdn.example.com/，支持绝大部分有镜像功能的CDN服务<br><b>被替换的原地址为主题文件位置，即：http://www.example.com/usr/themes/frozen/</b>'));
 	$form->addInput($cjcdnAddress);
 
 	$AttUrlReplace = new Typecho_Widget_Helper_Form_Element_Textarea('AttUrlReplace', NULL, NULL, _t('文章内的链接地址替换（建议用在图片等静态资源的链接上）'), _t('按照格式输入你的CDN链接以替换原链接，格式：<br><b class="notice">原地址=替换地址</b><br>原地址与新地址之间用等号“=”分隔，例如：<br><b>http://www.example.com/usr/uploads/=http://cdn.example.com/usr/uploads/</b><br>支持绝大部分有镜像功能的CDN服务，可设置多个规则，换行即可，一行一个'));
@@ -227,7 +227,7 @@ function spam_protection_pre($comment){
 
 function cjUrl($path) {
 	$options = Helper::options();
-	$ver = '?ver='.constant("INITIAL_VERSION_NUMBER");
+	$ver = '?ver='.constant("FROZEN_VERSION_NUMBER");
 	if ($options->cjcdnAddress) {
 		echo rtrim($options->cjcdnAddress, '/').'/'.$path.$ver;
 	} else {

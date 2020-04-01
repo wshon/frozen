@@ -1,12 +1,11 @@
 <?php
 /**
- * Initial - 简约而不简单
- * 还原本质 勿忘初心
+ * Frozen
  * 
- * @package Initial
- * @author JIElive
- * @version 2.4.4
- * @link http://www.offodd.com/
+ * @package Frozen
+ * @author muumlover
+ * @version 0.9.1
+ * @link http://ronpy.com/
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
 $this->need('header.php');
