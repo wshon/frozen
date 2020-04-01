@@ -165,6 +165,12 @@ function themeConfig($form) {
 	$ICPbeian = new Typecho_Widget_Helper_Form_Element_Text('ICPbeian', NULL, NULL, _t('ICP备案号'), _t('在这里输入ICP备案号,留空则不显示'));
 	$form->addInput($ICPbeian);
 
+    $baiduPush = new Typecho_Widget_Helper_Form_Element_Radio('baiduPush',
+    array(1 => _t('启用'),
+    0 => _t('关闭')),
+    0, _t('百度推送'), _t('默认关闭，启用后将自动推送到百度收录'));
+    $form->addInput($baiduPush);
+
 	$CustomContent = new Typecho_Widget_Helper_Form_Element_Textarea('CustomContent', NULL, NULL, _t('底部自定义内容'), _t('位于底部，footer之后body之前，适合放置一些JS内容，如网站统计代码等（若开启全站Pjax，目前支持Google和百度统计的回调，其余统计代码可能会不准确）'));
 	$form->addInput($CustomContent);
 }
