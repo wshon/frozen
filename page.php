@@ -8,6 +8,9 @@
 <?php endif; ?>
 <article class="post">
 <h1 class="post-title"><a href="<?php $this->permalink() ?>"><?php $this->title() ?></a></h1>
+<?php if($this->user->hasLogin()): ?>
+<a href="<?php $this->options->adminUrl('write-page.php?cid=' . $this->cid); ?>">编辑</a>
+<?php endif; ?>
 <div class="post-content">
 <?php $this->content(); ?>
 </div>
