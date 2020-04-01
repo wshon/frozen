@@ -1,6 +1,6 @@
 # Typecho主题 - Frozen v0.9.1
 
-![主题封面](https://raw.githubusercontent.com/muumlover/frozen/master/frozen.png)
+![主题封面](https://raw.githubusercontent.com/muumlover/frozen/master/Frozen.png)
 
 基于[OFFODD的 Initial](https://www.offodd.com/17.html)二次开发
 
