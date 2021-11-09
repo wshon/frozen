@@ -4,7 +4,7 @@
  * 
  * @package Frozen
  * @author muumlover
- * @version 0.9.1
+ * @version 0.9.2
  * @link http://ronpy.com/
  */
 if (!defined('__TYPECHO_ROOT_DIR__')) exit;
@@ -13,12 +13,7 @@ $this->need('header.php');
 <div id="main">
 <?php if ($this->_currentPage == 1 && !empty($this->options->ShowWhisper) && in_array('index', $this->options->ShowWhisper)): ?>
 <article class="post whisper">
-<div class="post-content">
 <?php Whisper(); ?>
-<?php if ($this->user->pass('editor', true) && (!FindContents('page-whisper.php') || isset(FindContents('page-whisper.php')[1]))): ?>
-<p class="notice"><b>仅管理员可见: </b><br><?php echo FindContents('page-whisper.php') ? '发现多个"轻语"模板页面，已自动选取内容最多的页面作为展示，请删除多余模板页面。' : '未找到"轻语"模板页面，请检查是否创建模板页面。' ?></p>
-<?php endif; ?>
-</div>
 </article>
 <?php endif; ?>
 <?php while($this->next()): ?>
@@ -32,7 +27,7 @@ $this->need('header.php');
 </ul>
 <div class="post-content">
 <?php if ($this->options->PjaxOption && $this->hidden): ?>
-<form method="post">
+<form <?php if (!$this->options->AjaxLoad): ?>action="<?php echo Typecho_Widget::widget('Widget_Security')->getTokenUrl($this->permalink); ?>" <?php endif; ?>method="post">
 <p class="word">请输入密码访问</p>
 <p>
 <input type="password" class="text" name="protectPassword" />
@@ -48,7 +43,7 @@ $this->need('header.php');
 </div>
 </article>
 <?php endwhile; ?>
-<?php $this->pageNav('上一页', $this->options->AjaxLoad ? '查看更多' : '下一页', 0, '..', $this->options->AjaxLoad ? array('wrapClass' => 'page-navigator ajaxload') : ''); ?>
+<?php $this->pageNav('上一页', $this->options->AjaxLoad ? '查看更多' : '下一页', 0, '..', $this->options->AjaxLoad ? array('wrapClass' => $this->options->AjaxLoad == 'auto' ? 'page-navigator ajaxload auto' : 'page-navigator ajaxload') : ''); ?>
 </div>
 <?php $this->need('sidebar.php'); ?>
 <?php $this->need('footer.php'); ?>

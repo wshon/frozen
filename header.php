@@ -4,7 +4,7 @@
 <head>
 <meta charset="<?php $this->options->charset(); ?>" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <?php if ($this->options->favicon): ?>
 <link rel="shortcut icon" href="<?php $this->options->favicon(); ?>" />
 <?php endif; ?>
@@ -18,6 +18,9 @@
 <?php $this->header('generator=&template=&pingback=&xmlrpc=&wlw=&commentReply=&rss1=&rss2=&antiSpam=&atom='); ?>
 <link rel="stylesheet" href="<?php cjUrl('style.min.css') ?>" />
 <link href="//<?php if ($this->options->cjCDN == 'bc'): ?>cdn.bootcss.com/prism/<?php elseif ($this->options->cjCDN == 'cf'): ?>cdnjs.cloudflare.com/ajax/libs/prism/<?php else: ?>cdn.jsdelivr.net/npm/prismjs@<?php endif; ?><?php $this->options->prismVersion() ?>/themes/<?php $this->options->prismTheam() ?>.css" rel="stylesheet">
+<?php if ($this->options->CustomCSS): ?>
+<style type="text/css"><?php $this->options->CustomCSS(); ?></style>
+<?php endif; ?>
 </head>
 <body <?php if ($this->options->HeadFixed): ?>class="head-fixed"<?php endif; ?>>
 <!--[if lt IE 9]>
@@ -26,17 +29,10 @@
 <header id="header">
 <div class="container clearfix">
 <div class="site-name">
-<?php if ($this->options->logoUrl): ?>
-<h1>
-<a id="logo" href="<?php $this->options->siteUrl(); ?>">
-<img src="<?php $this->options->logoUrl() ?>" alt="<?php $this->options->title() ?>" title="<?php $this->options->title() ?>" />
+<<?php echo $this->is('post') || $this->is('page') ? 'p' : 'h1' ?> class="site-title">
+<a id="logo" href="<?php $this->options->siteUrl(); ?>" rel="home"><?php if ($this->options->logoUrl && ($this->options->titleForm == 'logo' || $this->options->titleForm == 'all')): ?><img src="<?php $this->options->logoUrl() ?>" alt="<?php $this->options->title() ?>" title="<?php $this->options->title() ?>" /><?php endif; ($this->options->titleForm == 'logo' && $this->options->logoUrl) ? '' : ($this->options->customTitle ? $this->options->customTitle() : $this->options->title()) ?>
 </a>
-</h1>
-<?php else: ?>
-<h1>
-<a id="logo" href="<?php $this->options->siteUrl(); ?>"><?php if ($this->options->customTitle): $this->options->customTitle(); else: $this->options->title(); endif; ?></a>
-</h1>
-<?php endif; ?>
+</<?php echo $this->is('post') || $this->is('page') ? 'p' : 'h1' ?>>
 </div>
 <script>function Navswith(){document.getElementById("header").classList.toggle("on")}</script>
 <button id="nav-swith" onclick="Navswith()"><span></span></button>
@@ -50,7 +46,7 @@
 <ul class="nav-menu">
 <li><a href="<?php $this->options->siteUrl(); ?>">首页</a></li>
 <?php if (!empty($this->options->Navset) && in_array('ShowCategory', $this->options->Navset)): if (in_array('AggCategory', $this->options->Navset)): ?>
-<li class="menu-parent"><a><?php if ($this->options->CategoryText): $this->options->CategoryText(); else: ?>分类<?php endif; ?></a>
+<li class="menu-parent"><a><?php echo $this->options->CategoryText ? $this->options->CategoryText : '分类' ?></a>
 <ul>
 <?php
 endif;
@@ -85,7 +81,7 @@ endif;
 if (!empty($this->options->Navset) && in_array('ShowPage', $this->options->Navset)):
 if (in_array('AggPage', $this->options->Navset)):
 ?>
-<li class="menu-parent"><a><?php if ($this->options->PageText): $this->options->PageText(); else: ?>其他<?php endif; ?></a>
+<li class="menu-parent"><a><?php echo $this->options->PageText ? $this->options->PageText : '其他' ?></a>
 <ul>
 <?php
 endif;
@@ -103,5 +99,5 @@ endif; ?>
 </div>
 </div>
 </header>
-<div id="body">
+<div id="body"<?php if ($this->options->PjaxOption): ?> in-pjax<?php endif; ?>>
 <div class="container clearfix">
