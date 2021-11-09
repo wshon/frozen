@@ -17,7 +17,9 @@
 ), '', ' - '); ?><?php $this->options->title(); if ($this->is('index') && $this->options->subTitle): ?> - <?php $this->options->subTitle(); endif; ?></title>
 <?php $this->header('generator=&template=&pingback=&xmlrpc=&wlw=&commentReply=&rss1=&rss2=&antiSpam=&atom='); ?>
 <link rel="stylesheet" href="<?php cjUrl('style.min.css') ?>" />
-<link href="//<?php if ($this->options->cjCDN == 'bc'): ?>cdn.bootcss.com/prism/<?php elseif ($this->options->cjCDN == 'cf'): ?>cdnjs.cloudflare.com/ajax/libs/prism/<?php else: ?>cdn.jsdelivr.net/npm/prismjs@<?php endif; ?><?php $this->options->prismVersion() ?>/themes/<?php $this->options->prismTheam() ?>.css" rel="stylesheet">
+<?php if ($this->options->prismTheam): ?>
+<link href="//<?php if ($this->options->cjCDN == 'cf'): ?>cdnjs.cloudflare.com/ajax/libs/prism/<?php elseif ($this->options->cjCDN == 'sc'): ?>cdn.staticfile.org/prism/<?php elseif ($this->options->cjCDN == 'bc'): ?>cdn.bootcss.com/prism/<?php else: ?>cdn.jsdelivr.net/npm/prismjs@<?php endif; ?><?php $this->options->prismVersion() ?>/themes/<?php $this->options->prismTheam() ?>.css" rel="stylesheet">
+<?php endif; ?>
 <?php if ($this->options->CustomCSS): ?>
 <style type="text/css"><?php $this->options->CustomCSS(); ?></style>
 <?php endif; ?>

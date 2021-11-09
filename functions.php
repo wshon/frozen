@@ -79,7 +79,8 @@ function themeConfig($form) {
 	$form->addInput($prismVersion);
 
 	$prismTheam = new Typecho_Widget_Helper_Form_Element_Radio('prismTheam',
-	array('prism' => _t('Dafault'),
+	array(false => _t('不启用'),
+	'prism' => _t('Dafault'),
 	'prism-dark' => _t('Dark'),
 	'prism-funky' => _t('Funky'),
 	'prism-okaidia' => _t('Okaidia'),
@@ -87,7 +88,7 @@ function themeConfig($form) {
 	'prism-coy' => _t('Coy'),
 	'prism-solarizedlight' => _t('Solarized light'),
 	'prism-tomorrow' => _t('Tomorrow')),
-	'prism', _t('prism主题'), _t('默认dafault，请根据需求选择合适主题'));
+	false, _t('prism主题'), _t('默认不启用，请根据需求选择合适主题'));
 	$form->addInput($prismTheam);
 
 	$cjCDN = new Typecho_Widget_Helper_Form_Element_Radio('cjCDN', 
@@ -105,11 +106,11 @@ function themeConfig($form) {
 	false, _t('Gravatar头像源'), _t('默认官方源'));
 	$form->addInput($GravatarUrl);
 
-    $commentProtect = new Typecho_Widget_Helper_Form_Element_Radio('commentProtect',
-    array(1 => _t('启用'),
-    0 => _t('关闭')),
-    0, _t('评论验证码'), _t('默认关闭，启用后将开启评论验证码'));
-    $form->addInput($commentProtect);
+  $commentProtect = new Typecho_Widget_Helper_Form_Element_Radio('commentProtect',
+  array(1 => _t('启用'),
+  0 => _t('关闭')),
+  0, _t('评论验证码'), _t('默认关闭，启用后将开启评论验证码'));
+  $form->addInput($commentProtect);
 
 	$compressHtml = new Typecho_Widget_Helper_Form_Element_Radio('compressHtml',
 	array(1 => _t('启用'),
